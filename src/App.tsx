@@ -30,6 +30,9 @@ export const App = () => {
     }
   }, []);
 
+  const user = Telegram.WebApp.initDataUnsafe.user;
+  console.log(user?.id, user?.first_name);
+
   return (
     <div>
       <h1>Мой Telegram Web App на Next.js</h1>
@@ -38,6 +41,7 @@ export const App = () => {
       ) : (
         <p>Ожидание инициализации Telegram Web App...</p>
       )}
+      <p>Членол</p>
       <div>
         <h2>Список задач</h2>
         <input
