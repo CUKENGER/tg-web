@@ -1,64 +1,23 @@
-import { useState, useEffect } from "react";
-import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { TodoPage } from "./pages/Todo";
+import { CreateProduct } from "./pages/createProduct";
+import { ProductsPage } from "./pages/Products";
+import { Header } from './components/header';
+import { ProductPage } from './pages/Product';
 
 export const App = () => {
-  const [tgData, setTgData] = useState<string | null>(null);
-  const [task, setTask] = useState("");
-  const [tasks, setTasks] = useState<string[]>([]);
-
-  const addTask = () => {
-    if (task.trim() !== "") {
-      setTasks([...tasks, task]);
-      setTask("");
-    }
-  };
-
-  const removeTask = (index: number) => {
-    setTasks(tasks.filter((_, i) => i !== index));
-  };
-
-  useEffect(() => {
-    if (window.Telegram && window.Telegram.WebApp) {
-      const tg = window.Telegram.WebApp;
-      tg.ready();
-      setTgData(tg.initData);
-
-      // Можно добавить обработчики событий:
-      // tg.onEvent('mainButtonClicked', () => { ... });
-    } else {
-      console.log("Приложение не запущено в Telegram");
-    }
-  }, []);
-
-  const user = Telegram.WebApp.initDataUnsafe.user;
-  console.log(user?.id, user?.first_name);
 
   return (
-    <div>
-      <h1>Мой Telegram Web App на Next.js</h1>
-      {tgData ? (
-        <pre>{JSON.stringify(tgData, null, 2)}</pre>
-      ) : (
-        <p>Ожидание инициализации Telegram Web App...</p>
-      )}
-      <p>Членол</p>
-      <div>
-        <h2>Список задач</h2>
-        <input
-          type="text"
-          placeholder="Новая задача"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
-        />
-        <button onClick={addTask}>Добавить</button>
-        <ul>
-          {tasks.map((item, index) => (
-            <li key={index}>
-              {item} <button onClick={() => removeTask(index)}>Удалить</button>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div className="max-w-7xl mx-auto">
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<TodoPage />} />
+          <Route path="/products/create" element={<CreateProduct />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products/:id" element={<ProductPage />} />
+        </Routes>
+      </Router>
     </div>
   );
 };

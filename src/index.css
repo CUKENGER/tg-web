@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-color: #ffffff;
+  --secondary-bg: #f7f7f7;
+  --text-color: black;
+  --button-color: #007aff;
+  --button-text-color: white;
+  --link-color: #007aff;
+}
+
+.dark {
+  --bg-color: #1d1d1d;
+  --secondary-bg: #333333;
+  --text-color: #ffffff;
+  --button-color: #004c9e;
+  --button-text-color: white;
+  --link-color: #007aff;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: -apple-system, blinkmacsystemfont, "segoe ui", roboto, helvetica,
+    arial, sans-serif;
+  margin: 0;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  overflow-x: hidden;
+}
+
+button {
+  color: var(--button-text-color);
+  background-color: var(--button-color);
+}
+
+input {
+  background-color: var(--secondary-bg);
+  color: var(--text-color);
+}
+
+a {
+  color: var(--link-color);
+}
+
